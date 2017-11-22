@@ -28,6 +28,9 @@ runtime library to be linked into the application. See
 with the library linked in using our
 [Maker](https://github.com/CMUAbstract/maker) dependency build system. The
 README of the `edb-rat` app has a tutorial for the debugging features of EDB.
+This application can be copied and modified as a template to quickly create an
+application with immediate support for EDB.
+
 The programmer\'s interface to EDB is
 [edb-console](https://github.com/CMUAbstract/edb-console), a GDB-like console
 that runs on a workstation computer and communicates to EDB over USB.
