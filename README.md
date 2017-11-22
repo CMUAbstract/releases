@@ -1,4 +1,4 @@
-# Projects by Abstract group at Carnegie Mellon University
+# Software+Hardware Releases by Abstract Group at Carnegie Mellon University
 
 This wiki-like bootstrap repository contains the getting-started information
 for developers who would like to make use of the software and hardware tools we
