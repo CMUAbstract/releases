@@ -24,7 +24,7 @@ to poor orientation). This allows the same board to be used in terrestrial
 applications, including in cloudy weather, or near windows indoors.
 
 The firmware for the radio+profiler MCU is in
-[edb-sat-edb](https://github.com/CMUAbstract/edb-sat-edb), which includes the
+[edb-sat-prof](https://github.com/CMUAbstract/edb-sat-prof), which includes the
 [KickSat SpriteRadio stack](https://github.com/kicksat/arduino_sprite) re-packaged
 for [Maker](https://github.com/CMUAbstract/maker). The application MCU runs the
 [app-space-data-chain](https://github.com/CMUAbstract/app-space-data-chain)
