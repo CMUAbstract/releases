@@ -31,12 +31,13 @@ applications. The application is built using
 [Maker](https://github.com/CMUAbstract/maker) which automatically builds the
 `libchain` dependency when the application is built.
 
-Chain API
----------
+Chain Programming Interface
+---------------------------
 
-The programmer's interface consists of a set of macros for declaring tasks
-and channels, passing data through channels, and transferring control
-flow between tasks.
+The programmer\'s interface provided by `libchain`, and defined in
+`libchain/src/include/libchain/libchain.h`, consists of a set of macros for
+declaring tasks and channels, passing data through channels, and transferring
+control flow between tasks.
 
 A guiding principle followed in this implementation is to keep as much work as
 possible static, avoiding introducing any kind of runtime state that is
