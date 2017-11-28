@@ -1,5 +1,5 @@
-EDB
-===
+EDB: Energy-interference Free Debugger
+======================================
 
 Synopsis
 --------
