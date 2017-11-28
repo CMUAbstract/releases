@@ -22,7 +22,7 @@ and for accessing channels from task code.
 Chain implementation supports MSP430 microcontrollers with FRAM non-volatile
 memory. [Applications written in Chain](README.md#benchmark-applications) have
 been tested on the [WISP5](http://wisp5.wikispaces.com/WISP+Home) RF-powered
-device, on the [Capybara.md] board, the [EDBsat](EDBsat.md) board, and on TI
+device, on the [Capybara](Capybara.md) board, the [EDBsat](EDBsat.md) board, and on TI
 MSP430FRxxxx Launchpads.
 
 [Blinker](https://github.com/CMUAbstract/app-blinker-chain) is an example
