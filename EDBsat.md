@@ -1,5 +1,5 @@
-EDBsat
-======
+EDBsat: Solar-powered Batteryless KickSat Sprite Satellite
+==========================================================
 
 Synopsis
 --------
