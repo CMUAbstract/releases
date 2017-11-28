@@ -34,7 +34,15 @@ applications. The application is built using
 Chain API
 ---------
 
-The programmer's interface consists of the following macros.
+The programmer's interface consists of a set of macros for declaring tasks
+and channels, passing data through channels, and transferring control
+flow between tasks.
+
+A guiding principle followed in this implementation is to keep as much work as
+possible static, avoiding introducing any kind of runtime state that is
+fundamentally statically-determined. This approach often sacrifices conciseness
+in return for performance and extensibility for eventually creating a compiler
+that would compile a nicer syntax into the above primitives.
 
 Declare and define a task:
 
@@ -112,10 +120,3 @@ To transition control between tasks, task code may invoke the transition stateme
 at any point:
 
     TRANSITION_TO(task_destination)
-
-
-**Sidnote**: A guiding principle followed in this implementation is to keep as
-much work as possible static, avoiding introducing any kind of runtime state
-that is fundamentally statically-determined. This approach often sacrifices
-conciseness in return for performance and extensibility for eventually creating
-a compiler that would compile a nicer syntax into the above primitives.
