@@ -10,7 +10,8 @@ guide.
 
 ## Programming models for intermittent computing
 
-* [Alpaca](Alpaca.md): a checkpoint-less programming model with compiler support for intermittent programming
+* [Alpaca](Alpaca.md) \[[web](https://cmuabstract.github.io/alpaca-landing-page/)\] :
+a checkpoint-less programming model with compiler support for intermittent programming
 * [Chain](Chain.md): a task-based programming model and runtime for intermittent programming
 * [Capybara](Capybara.md): hardware and firmware for reconfigurable energy storage
 
