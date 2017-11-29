@@ -82,3 +82,36 @@ branches in the same repository or in separate repositories.
 | Gesture | recognize gesture and send over BLE | | [repo](https://github.com/CMUAbstract/app-gesture-chain) | |
 | TempAlarm | monitor temperature and send BLE alarm | | [repo](https://github.com/CMUAbstract/app-tempalarm-chain) | |
 
+## Misc drivers and libraries
+
+* [libmsp](https://github.com/CMUAbstract/libmsp) : basic low-level drivers and
+  macros for accessing peripherals on MSP430 (watchdog, GPIO, UART) and a small
+  [printf implementation](http://forum.43oh.com/topic/1289-tiny-printf-c-version/#entry10652)
+* [libio](https://github.com/CMUAbstract/libio) : provides a console with printing
+  and logging to a selectable backend (HW UART from `libmsp`, SW UART from
+  `msp430-softuart`, [EDB](EDB.md))
+* [libharvest](https://github.com/CMUAbstract/libharvest) : minimum
+  functionality required to run on an energy-harvester without specialized HW
+  (sleep until threshold using internal comparator on MSP430)
+* [libmcppot](https://github.com/CMUAbstract/libmcppot) : driver for MCP4xxx
+  digital potentiometer for I2C on MSP430
+* [libfxl](https://github.com/CMUAbstract/libfxl) : driver for FXL64xx
+  GPIO expander for I2C on MSP430
+* [libmspuartlink](https://github.com/CMUAbstract/libmspuartlink) : library
+  for sending packets across UART between two MSP430 MCUs
+* [msp430-softuart](https://github.com/CMUAbstract/msp430-softuart) : fork
+  of SW (bitbanged) UART implementation for MSP430 by [Nicholas J.
+  Conn](https://github.com/wendlers/msp430-softuart)
+  packaged for [Maker](https://github.com/CMUAbstract/maker)
+
+## Misc utilities
+
+* [Maker](https://github.com/CMUAbstract/maker) : dependency build system for C projects,
+  implemented in GNU Make, that automatically builds dependencies along with the
+  top-level application
+* [mspdma](https://github.com/CMUAbstract/mspdma) : measure DMA performance on MSP430
+
+## Misc packages
+
+* [fftw-PKGBUILD](https://github.com/CMUAbstract/fftw-PKGBUILD) : Arch Linux
+  PKGBUILD for FFTW library that enables NEON SIMD on ARM
