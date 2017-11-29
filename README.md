@@ -15,6 +15,12 @@ a checkpoint-less programming model with compiler support for intermittent progr
 * [Chain](Chain.md): a task-based programming model and runtime for intermittent programming
 * [Capybara](Capybara.md): hardware and firmware for reconfigurable energy storage
 
+* Prior work **by other researchers**, forked, updated, and re-packaged for
+  seemless builds of applications alongside builds with our systems:
+
+    - [DINO](DINO.md) : static checkpoints with compiler-analysis that versions non-volatile data
+    - [Mementos](Mementos.md) : statically-inserted dynamic checkpoints
+
 ## Tools
 
 * [EDB](EDB.md): an energy-interference-free debugger for energy-harvesting devices
