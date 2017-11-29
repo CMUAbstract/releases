@@ -22,3 +22,6 @@ when it builds the application, it also builds and invokes the DINO
 compiler passes on the application bytecode, as well as builds and links the
 DINO runtime library. In Maker-built applications, the builds using
 different systems/toolchains coexist alongside each other.
+
+Note that DINO depends on Mementos, and our fork of DINO includes our
+fork of Mementos as a submodule, as is the convention with Maker.
