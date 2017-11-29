@@ -78,6 +78,7 @@ branches in the same repository or in separate repositories.
 | Cuckoo | cuckoo filter data structure | | [repo](https://github.com/CMUAbstract/app-cuckoo-chain) | [repo](https://github.com/CMUAbstract/alpaca-cuckoo) |
 | CEM | cold-chain equipment monitor with LZW compression | | [repo](https://github.com/CMUAbstract/app-temp-log-chain) | [repo](https://github.com/CMUAbstract/alpaca-temp-log) |
 | Bitcount | counts bits in bitmask | [repo](https://github.com/CMUAbstract/dino_bitcount) | [repo](https://github.com/CMUAbstract/chain-bitcount) | [repo](https://github.com/CMUAbstract/alpaca-bitcount) |
+| Blowfish | encrypt with Blowfish algorithm | [repo](https://github.com/CMUAbstract/dino_blowfish) | [repo](https://github.com/CMUAbstract/chain-blowfish) | [repo](https://github.com/CMUAbstract/alpaca-blowfish) |
 | Gesture | recognize gesture and send over BLE | | [repo](https://github.com/CMUAbstract/app-gesture-chain) | |
 | TempAlarm | monitor temperature and send BLE alarm | | [repo](https://github.com/CMUAbstract/app-tempalarm-chain) | |
 
