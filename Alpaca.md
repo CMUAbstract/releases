@@ -1,6 +1,8 @@
 Alpaca: Intermittent Programs without Checkpoints
 =================================================
 
+## Synopsis
+
 Alpaca (OOPSLA\'17) is a task-based programming model for writing reliable
 software for intermittent, energy-harvesting computer systems. Alpaca programs
 are written as a set of tasks that access shared data in non-volatile memory
@@ -23,6 +25,8 @@ Also, complete example applications written with Alpaca are available in the
 [list of benchmarks in the release
 documentation](https://github.com/CMUAbstract/releases), and can serve as a
 template for quickly creating a custom application.
+
+## Snapshot
 
 A snapshot of the Alpaca source code, benchmark applications, and result data
 files with experimental results associated with the OOPSLA\'17 publication is
