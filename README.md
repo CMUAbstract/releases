@@ -97,6 +97,8 @@ branches in the same repository or in separate repositories.
   digital potentiometer for I2C on MSP430
 * [libfxl](https://github.com/CMUAbstract/libfxl) : driver for FXL64xx
   GPIO expander for I2C on MSP430
+* [libtemp](https://github.com/CMUAbstract/libtemp) : driver for TMP36 analog
+  temperature sensor using MSP430 ADC
 * [libmspuartlink](https://github.com/CMUAbstract/libmspuartlink) : library
   for sending packets across UART between two MSP430 MCUs
 * [msp430-softuart](https://github.com/CMUAbstract/msp430-softuart) : fork
