@@ -101,10 +101,13 @@ branches in the same repository or in separate repositories.
   temperature sensor using MSP430 ADC
 * [libmspuartlink](https://github.com/CMUAbstract/libmspuartlink) : library
   for sending packets across UART between two MSP430 MCUs
-* [msp430-softuart](https://github.com/CMUAbstract/msp430-softuart) : fork
-  of SW (bitbanged) UART implementation for MSP430 by [Nicholas J.
-  Conn](https://github.com/wendlers/msp430-softuart)
-  packaged for [Maker](https://github.com/CMUAbstract/maker)
+
+* Forks of libraries by **other authors** re-packaged for [Maker](https://github.com/CMUAbstract/maker):
+
+  - [msp430-softuart](https://github.com/CMUAbstract/msp430-softuart) : SW (bitbanged) UART
+  implementation for MSP430 by [Nicholas J.  Conn](https://github.com/wendlers/msp430-softuart)
+  - [libmspware](https://github.com/CMUAbstract/libmspware) : [TI
+    MSPware](http://www.ti.com/tool/mspware) library with peripheral drivers for MSP430
 
 ## Misc utilities
 
