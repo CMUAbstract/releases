@@ -41,8 +41,9 @@ harvester](http://www.powercastco.com/products/powerharvester-receivers/)) on
 intermittent power. So far, all devices are based on MSP430.
 
 All applications are built using [Maker](https://github.com/CMUAbstract/maker)
-dependency build system, which wraps third-party compiler toolchains described
-[here](Toolchains.md). The application is the root of the dependency tree, and
+dependency build system, which wraps [third-party compiler
+toolchains](Toolchains.md). The application is the root of the dependency tree,
+and
 its dependencies (libraries and
 [toolchains](#programming-models-and-runtimes-for-intermittently-powered-hardware))
 are specified in the application\'s Maker makefile.  Toolchain dependencies
