@@ -1,0 +1,14 @@
+--- a/drivers/tilib.c	2017-02-04 20:36:27.775860455 -0500
++++ b/drivers/tilib.c	2017-02-04 20:36:58.065657522 -0500
+@@ -393,9 +393,11 @@
+ {
+ 	struct tilib_device *dev = (struct tilib_device *)dev_base;
+ 
++#if 0 // don't automatically start the app, needed for experimental setup (-AC)
+ 	printc_dbg("MSP430_Run\n");
+ 	if (tilib_api->MSP430_Run(FREE_RUN, 1) < 0)
+ 		report_error(dev, "MSP430_Run");
++#endif
+ 
+ 	printc_dbg("MSP430_Close\n");
+ 	tilib_api->MSP430_Close(0);

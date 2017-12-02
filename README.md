@@ -41,16 +41,17 @@ harvester](http://www.powercastco.com/products/powerharvester-receivers/)) on
 intermittent power. So far, all devices are based on MSP430.
 
 All applications are built using [Maker](https://github.com/CMUAbstract/maker)
-dependency build system. The application is the root of the dependency tree,
-and its dependencies (libraries and
+dependency build system, which wraps third-party compiler toolchains described
+[here](Toolchains.md). The application is the root of the dependency tree, and
+its dependencies (libraries and
 [toolchains](#programming-models-and-runtimes-for-intermittently-powered-hardware))
 are specified in the application\'s Maker makefile.  Toolchain dependencies
 provide the compiler passes and runtime libraries needed to build the app using
 that toolchain, along with build recipes for Maker that specify how to invoke
-compiler passes, link the runtime. When Maker builds an
-application, it builds all its dependencies from source, to ensure that all
-compiler flags are the same. Builds using multiple toolchains coexist in
-separate subdirectories of `bld/`.
+compiler passes, link the runtime. When Maker builds an application, it builds
+all its dependencies from source, to ensure that all compiler flags are the
+same. Builds using multiple toolchains coexist in separate subdirectories of
+`bld/`.
 
 Each application repository includes references to the repositories of its
 dependencies as Git submodules (in `ext/`), so clone with `git clone

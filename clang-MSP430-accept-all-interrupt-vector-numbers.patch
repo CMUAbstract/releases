@@ -1,0 +1,26 @@
+From 212cfef26e34f92c81297c96127b811a3cd0b698 Mon Sep 17 00:00:00 2001
+From: Alexei Colin <ac@alexeicolin.com>
+Date: Tue, 2 Aug 2016 01:14:15 -0400
+Subject: [PATCH] MSP430: accept all interrupt vector numbers (?)
+
+Not sure what this was about.
+---
+ lib/Sema/SemaDeclAttr.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/Sema/SemaDeclAttr.cpp b/lib/Sema/SemaDeclAttr.cpp
+index 9cc082152b..9bbd5b2c3f 100644
+--- a/lib/Sema/SemaDeclAttr.cpp
++++ b/lib/Sema/SemaDeclAttr.cpp
+@@ -4220,7 +4220,7 @@ static void handleMSP430InterruptAttr(Sema &S, Decl *D,
+   }
+ 
+   unsigned Num = NumParams.getLimitedValue(255);
+-  if ((Num & 1) || Num > 30) {
++  if (Num == 0) {
+     S.Diag(Attr.getLoc(), diag::err_attribute_argument_out_of_bounds)
+       << Attr.getName() << (int)NumParams.getSExtValue()
+       << NumParamsExpr->getSourceRange();
+-- 
+2.14.2
+
