@@ -28,7 +28,15 @@ The firmware for the radio+profiler MCU is in
 [KickSat SpriteRadio stack](https://github.com/kicksat/arduino_sprite) re-packaged
 for [Maker](https://github.com/CMUAbstract/maker). The application MCU runs the
 [app-space-data-chain](https://github.com/CMUAbstract/app-space-data-chain)
-application.
+application. Installation notes for the software are given later in this document.
+
+[Request an EDBsat board from us](http://abstract.ece.cmu.edu) and/or see the
+hardware design files (TODO: release). See instructions below on how to build a
+ground station with real-time transmisison decoding, an LCD display, and
+a battery for portable operation.
+
+Ground station hardware
+-----------------------
 
 The ground station for receiving transmissions is built around an SDR dongle
 and GNU radio software as described in the [KickSat
@@ -49,6 +57,56 @@ display](http://www.hardkernel.com/main/products/prdt_info.php?g_code=G141743018
 Our groundstation hardware also includes a battery and power conditioning for
 portable operation (TODO: details, upstream).
 
+TODO: detailed, BOM, pictures, etc.
+
+Ground station software
+-----------------------
+
+On Arch Linux, build and install the following packages, by running for each package:
+
+    git clone URL
+    cd repo
+    makepkg -i
+
+List of packages in order of dependency:
+
+* [`fftw-PKGBUILD`](https://github.com/CMUAbstract/fftw-PKGBUILD)
+* [`arm-perfcnt-module-dkms-PKGBUILD`](https://github.com/CMUAbstract/arm-perfcnt-module-dkms-PKGBUILD)
+* [`sprite-groundstation-PKGBUILD`](https://github.com/CMUAbstract/sprite-groundstation-PKGBUILD)
+* [`python-odroidshow-PKGBUILD`](https://github.com/CMUAbstract/python-odroidshow-PKGBUILD)
+* [`edbsat-ground-PKGBUILD`](https://github.com/CMUAbstract/edbsat-ground-PKGBUILD)
+
+***TODO***: briefly describe each package
+
+***NOTE***: The `edbsat-ground` package references all other packages as
+dependencies, so if all these packages where on AUR, then installing it would
+be sufficient, but we're not at that point yet, so install each manually, in order.
+
+After installation, restart `systemd-modules-load` service so that it loads the
+`arm-perfcnt` module that we just installed (in later boots, the service will
+load the module automatically on boot):
+
+    systemdctl restart systemd-modules-load
+
+The `edbsat-ground` package installs a daemon that listens for transmissions on
+SDR, decodes them into bytes and EDBsat-specific packets, and displays both on
+the LCD screen. The daemon's configuration is in `/etc/edbsat-ground.conf`,
+which specifies the LCD device path and the output files where the decoded
+bytes and packets are saved. To start the daemon:
+
+    systemctl start edbsat-ground
+
+Use the `status` command to check if it launched ok and to see any error
+output, and `stop` command to terminate it.
+
+If the daemon is running, the LCD display should be showing bytes and packets
+from incoming transmissions.
+
+On other distributions, view the build and installation commands in each
+PKGBUILD and replicate them manually... or, just install Arch.
+
+### Some explanatory notes
+
 The GNU radio decoder requires [FFTW](http://www.fftw.org) library
 ([fftw](https://archlinuxarm.org/packages/armv7h/fftw) package on Arch Linux for ARM)
 to be rebuilt with ARM NEON SIMD support to make it fast enough for realtime.
@@ -58,15 +116,14 @@ PKGBUILD](https://github.com/CMUAbstract/fftw-PKGBUILD) branch
 `armv7-a`; on other distros, use the flags and build commands from this
 PKGBUILD manually. Before invoking the decoder, enable access to performance
 counters for the FFTW library using a kernel module linked from [FFTW
-docs](https://github.com/FFTW/fftw3/blob/master/README-perfcnt.md). When
-invoking the decoder, set CPU affinity to only the
-\"big\" A15 cores (avoiding the \"SMALL\" A7 cores) by prefixing the command with
-`taskset 0xf0`.
+docs](https://github.com/FFTW/fftw3/blob/master/README-perfcnt.md).
+
+When invoking the decoder, set CPU affinity to only the \"big\" A15 cores
+(avoiding the \"SMALL\" A7 cores) by prefixing the command with `taskset 0xf0`.
+The small cores are too slow for real-time decoding.
 
 The scripts in
 [edb-sat-edb/decoder](https://github.com/CMUAbstract/edb-sat-edb/tree/master/decoder)
 parse the received bytes, decoded by the GNU radio decoder, into EDBsat packets
 and display the bytes and the packets on the LCD display.
 
-[Request an EDBsat board from us](http://abstract.ece.cmu.edu) and/or see the
-hardware design files (TODO: release).
