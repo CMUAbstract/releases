@@ -115,6 +115,15 @@ Arrow/Digikey:
 output is ~0.2v above the supervisor threshold (3.2v for 3.0v supervisor) when
 the input supply is plugged in (5.9v).
 
+**Note**: LDO regulators are to protect the Odroid XU4 board and the amplifier,
+because the output from the DC-DC convertor may spike (e.g. when load current
+suddenly decreases). As an additional precaution, connect incoming power to
+Odroid XU4's power jack, not to the header pins, because the latter are not
+protected by the XU4's protection IC. I burned one board when DC-DC was
+connected directly to 5V pin, most likely due to a spike.
+
+**Note**: The 5V LDO regulator gets hot, so a small heatsink would be good.
+
 Ground station software
 -----------------------
 
