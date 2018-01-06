@@ -57,7 +57,63 @@ display](http://www.hardkernel.com/main/products/prdt_info.php?g_code=G141743018
 Our groundstation hardware also includes a battery and power conditioning for
 portable operation (TODO: details, upstream).
 
-TODO: detailed, BOM, pictures, etc.
+### Battery-powered base station
+
+The ground station based on Odroid XU4 described above, can be made portable
+by adding a battery and some power supply circuitry. The following design
+supports concurrently running the load and charging the battery at full
+charge current (1A).
+
+#### List of components
+
+Sparkfun/Digikey:
+
+* High current and high capacity LiPo battery: at least two of these in
+  parallel [PRT-13856](https://www.sparkfun.com/products/13856) (one is
+  insufficient, overcurrent protection trips)
+
+Amazon:
+
+* DC-DC Boost Converter, minimum 4A @ 5V output and minimum 3v input
+  [DROK ST45](images/edbsat/drok-st45.jpg)
+  [dead (!) link at which the product used to be](http://a.co/7DAG2K3)
+  [manufacturer](http://droking.com/)
+* DC-DC Boost Converter, 3V -> 10-16V, minimum 0.1A @ 10V [Yeeco 2577](http://a.co/95HBSTz)
+* DC-DC Buck Converter, 9-12V -> 5.5-6V, minimum 5A @ 6V, better >6A
+  [DROK 8A Buck](http://a.co/8BnJRGi)
+  [manufacturer](http://droking.com/)
+* 2x Schottky Diode, minimum 5A, [10SQ050 10A](http://a.co/2tssHQo)
+* Right-angle Micro-USB cable, 6''/15cm [ReadyPlug](http://a.co/ayUxb28)
+* Right-angle USB extension cable, 6''/15cm [Seadream](http://a.co/jltocNL)
+
+Arrow/Digikey:
+
+* Regulator, 5V, minimum 4A,
+  [MIC29500-5.0WT](https://www.arrow.com/en/products/mic29500-5.0wt/microchip-technology)
+* Regulator, 10-16V, minimum 50mA,
+  [TL750L10CLPR](https://www.arrow.com/en/products/tl750l10clpr/texas-instruments)
+* LiPo Charger, minimum 1A, [Adafruit LiPo Charger](https://www.adafruit.com/product/259)
+  [at Arrow](https://www.arrow.com/en/products/259/adafruit-industries)
+* Power P-FET, minimum 4A, as low Rdson as possible (50mOhm is too much, 15mOhm is
+  ok) [DMP4010SK3Q](https://www.arrow.com/en/products/dmp4010sk3q-13/diodes-incorporated)
+* Voltage supervisor, open drain, active high, ~3.0-5v threshold
+  [NCP301HSN45T1G](https://www.arrow.com/en/products/ncp301hsn45t1g/on-semiconductor)
+* Small signal P-FET [VP2106N3](https://www.arrow.com/en/products/vp2106n3-g/microchip-technology)
+* 1x 100uF ceramic or tantalum cap [TAP107K020HSB](https://www.arrow.com/en/products/tap107k020hsb/avx)
+* 2x 47uF ceramic or tantalum cap [FG16X5R1E476MRT00](https://www.arrow.com/en/products/fg16x5r1e476mrt00/tdk)
+* 2x JST-PH socket [JST-PH breakout](https://www.adafruit.com/product/1862)
+  [at Arrow](https://www.arrow.com/en/products/1862/adafruit-industries)
+* 1x 10K POT multi-turn, [64WR10KLF](https://www.arrow.com/en/products/64wr10klf/bi-technologies)
+* R=12k and R=3.9k for voltage divider
+* SPDT switch, 5A min, [S102031MS02Q](https://www.arrow.com/en/products/s102031ms02q/ck)
+
+**Note**: Use thick wires, at least 22AWG. Solder all joints, unless screw terminal.
+
+<img src="images/edbsat/edbsat-ground-circuit.svg" width=1400 />
+
+**Note**: Set POT on the input to voltage supervisor such that the divided
+output is ~0.2v above the supervisor threshold (3.2v for 3.0v supervisor) when
+the input supply is plugged in (5.9v).
 
 Ground station software
 -----------------------
