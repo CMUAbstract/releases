@@ -124,6 +124,10 @@ connected directly to 5V pin, most likely due to a spike.
 
 **Note**: The 5V LDO regulator gets hot, so a small heatsink would be good.
 
+
+<img src="images/edbsat/edbsat-ground-station-stack.jpg" />
+<img src="images/edbsat/edbsat-power-layer.jpg" />
+
 Ground station software
 -----------------------
 
