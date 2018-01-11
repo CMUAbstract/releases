@@ -158,6 +158,19 @@ List of packages with links to their parent repositories in order of dependency:
 dependencies, so if all these packages where on AUR, then installing it would
 be sufficient, but we're not at that point yet, so install each manually, in order.
 
+To flash the forked firmware for the Odroid SHOW LCD screen (with a battery
+indicator):
+1. Install Arduino IDE (`arduino` Arch package)
+2. Clone the [forked repo](https://github.com/CMUAbstract/ODROID-SHOW)
+    git clone https://github.com/CMUAbstract/ODROID-SHOW
+3. Open `show_main/show_main.ino` in the IDE
+4. In Preferences, set Sketchbook location to the repo directory
+5. Sketch->Import LIbrary->Add Library, add the repo directory
+6. Tools->Serial Port, select tty device that appears when plugging
+   in the LCD display via Micro-USB cable to your workstation, e.g.
+   `/dev/ttyUSB0`.
+7. Upload
+
 The `edbsat-ground` package installs a daemon that listens for transmissions on
 SDR, decodes them into bytes and EDBsat-specific packets, and displays both on
 the LCD screen. The daemon's configuration is in `/etc/edbsat-ground.conf`,
