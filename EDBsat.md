@@ -134,28 +134,29 @@ Ground station software
 On Arch Linux, build and install the following packages, by running for each package:
 
     git clone URL
-    cd repo
+    cd repodir/archpkg # except for fftw only do: cd fftw
     makepkg -i
 
-List of packages in order of dependency:
+List of packages with links to their parent repositories in order of dependency:
 
-* [`fftw-PKGBUILD`](https://github.com/CMUAbstract/fftw-PKGBUILD)
-* [`arm-perfcnt-module-dkms-PKGBUILD`](https://github.com/CMUAbstract/arm-perfcnt-module-dkms-PKGBUILD)
-* [`sprite-groundstation-PKGBUILD`](https://github.com/CMUAbstract/sprite-groundstation-PKGBUILD)
-* [`python-odroidshow-PKGBUILD`](https://github.com/CMUAbstract/python-odroidshow-PKGBUILD)
-* [`edbsat-ground-PKGBUILD`](https://github.com/CMUAbstract/edbsat-ground-PKGBUILD)
-
-***TODO***: briefly describe each package
+* [`fftw`](https://github.com/CMUAbstract/fftw-PKGBUILD): the library for FFT
+  computation that is part of decoding, GNU Radio loads the shared library
+  installed in the system by default.
+* [`arm-perfcnt-module-dkms`](https://github.com/CMUAbstract/enable_arm_pmu): kernel
+  module for allowing access to performance counters on ARM processors, needed by
+  the `fftw` library (for timing during the planning phase); the package contains
+  systemd config to have the module load on boot
+* [`sprite-groundstation`](https://github.com/CMUAbstract/sprite-groundstation-PKGBUILD):
+  GNU Radio decoder implementation for the Sprite encoding over the SDR
+* [`python-odroidshow`](https://github.com/CMUAbstract/SHOWtime): library for
+  writing to the LCD display hooked up to the ODROID XU4 board
+* [`edbsat-ground`](https://github.com/CMUAbstract/edb-sat-prof): firmware
+  for the radio MCU on the EDBsat, which also contains the python scripts
+  for parsing bytes into packets with app data and profile data
 
 ***NOTE***: The `edbsat-ground` package references all other packages as
 dependencies, so if all these packages where on AUR, then installing it would
 be sufficient, but we're not at that point yet, so install each manually, in order.
-
-After installation, restart `systemd-modules-load` service so that it loads the
-`arm-perfcnt` module that we just installed (in later boots, the service will
-load the module automatically on boot):
-
-    systemdctl restart systemd-modules-load
 
 The `edbsat-ground` package installs a daemon that listens for transmissions on
 SDR, decodes them into bytes and EDBsat-specific packets, and displays both on
