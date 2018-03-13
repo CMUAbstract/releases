@@ -46,10 +46,8 @@ Stick](http://www.nooelec.com/store/sdr/nesdr-hf-mini-2-plus-bundle.html),
 [Advanced Receiver P432VDG](http://www.advancedreceiver.com/page5.html) amplifier,
 and [Arrow Antenna 440-5](http://arrowantennas.com/arrowii/440-5ii.html). Our
 [fork of the GNU radio decoder
-software](https://github.com/CMUAbstract/groundstation) (packaged in
-[PKGBUILD](https://github.com/CMUAbstract/sprite-groundstation-PKGBUILD) for
-Arch Linux for easy installation) decodes packets in real-time on an [Odroid
-XU4 ARM
+software](https://github.com/CMUAbstract/groundstation) decodes packets in
+real-time on an [Odroid XU4 ARM
 board with fan](http://www.hardkernel.com/main/products/prdt_info.php?g_code=G143452239825)
 (passive heatsink is not enough), which has Cortex 4xA7+4xA15 big.LITTLE, and
 displays packets on an [Odroid Show2 LCD
@@ -146,7 +144,7 @@ List of packages with links to their parent repositories in order of dependency:
   module for allowing access to performance counters on ARM processors, needed by
   the `fftw` library (for timing during the planning phase); the package contains
   systemd config to have the module load on boot
-* [`sprite-groundstation`](https://github.com/CMUAbstract/sprite-groundstation-PKGBUILD):
+* [`sprite-groundstation`](https://github.com/CMUAbstract/groundstation):
   GNU Radio decoder implementation for the Sprite encoding over the SDR
 * [`python-odroidshow`](https://github.com/CMUAbstract/SHOWtime): library for
   writing to the LCD display hooked up to the ODROID XU4 board
