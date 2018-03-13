@@ -14,9 +14,9 @@ switches that connect and disconnect each bank at runtime.  The hardware design
 is implemented in the Capybara board, which demonstrates the reconfigurable energy
 storage hardware within a general-purpose solar-powered energy-harvesting device
 with several sensors (magnetometer, accelerometer with gyroscope, gesture, gas)
-and a BLE radio. The design files are available in the
-[capybara-hw](https://github.com/CMUAbstract/capybara-hw) repository. Assembled
-boards are available [on request](https://abstract.ece.cmu.edu/).
+and a BLE radio. The design files (schematics, board layout, BOM) are available
+in the [capybara](https://github.com/CMUAbstract/capybara) repository.
+Assembled boards are available [on request](https://abstract.ece.cmu.edu/).
 
 The software interface, provided by the
 [libcapybara](http://github.com/CMUAbstract/libcapybara) library, targets
