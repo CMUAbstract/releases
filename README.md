@@ -122,3 +122,14 @@ branches in the same repository or in separate repositories.
 
 * [fftw-PKGBUILD](https://github.com/CMUAbstract/fftw-PKGBUILD) : Arch Linux
   PKGBUILD for FFTW library that enables NEON SIMD on ARM
+
+## Hardware
+
+* [MSP-FET Splitter+Adapter](https://github.com/CMUAbstract/msp-fet-splitter): adapter board
+from MSP-FET 14-pin to two TI Spy-bi-wire 0.100'' 4-pin headers with a switch for self-powered
+mode and a switch to physically disconnect FET from target
+* [Adapter boards from 0.050'' to 0.100'' headers](https://github.com/CMUAbstract/adapter-50-100mil)
+useful for connecting to programming headers and debug headers with logic analyzers and
+jumper wires
+* [Powercast P2110 Breakout board](https://github.com/CMUAbstract/powercast-2110-breakout):
+breaks out the Powercast module to 0.100'' pins for breadboard
