@@ -80,6 +80,6 @@ We\'re happy to have shared EDB with the following research groups:
 
 * [Embedded Software Group, TU Delft](http://www.es.ewi.tudelft.nl/)
 * [NEJ Group, Department of ECE, University of Toronto](http://www.eecg.toronto.edu/~enright/)
-* [Persist Research Lab, Clemsom University](http://persist.cs.clemson.edu/)
+* [Persist Research Lab, Clemson University](http://persist.cs.clemson.edu/)
 * [Lab11, University of Michigan](https://lab11.eecs.umich.edu/)
 
