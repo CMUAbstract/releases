@@ -71,9 +71,9 @@ code with boundaries vs\. task-based code), applications have multiple
 implementations, one per toolchain.  The implementations are stored either as
 branches in the same repository or in separate repositories.
 
-| Name    | Description  | C/Mementos/DINO | Chain | Alpaca |
+| Name/Repo | Description  | C/Mementos/DINO | Chain | Alpaca |
 | ------- | ------------ | ------ | ----- | ------ |
-| Blinker | blink an LED | [repo](https://github.com/CMUAbstract/app-blinker) | [repo](https://github.com/CMUAbstract/app-blinker-chain) | |
+| [Blinker](https://github.com/CMUAbstract/app-blinker) | blink an LED | [master branch](https://github.com/CMUAbstract/app-blinker) | [chain branch](https://github.com/CMUAbstract/app-blinker/tree/chain) | |
 | SpaceData | sense for [EDBsat](EDBsat.md) | | [repo](https://github.com/CMUAbstract/app-space-data-chain) | |
 | AR | activity recognition using trained model | [repo](https://github.com/CMUAbstract/app-activity-chkpt) | [repo](https://github.com/CMUAbstract/app-activity-chain) | [repo](https://github.com/CMUAbstract/alpaca-activity) |
 | RSA | public-key encryption | | [repo](https://github.com/CMUAbstract/app-rsa-chain) | [repo](https://github.com/CMUAbstract/alpaca-rsa) |
