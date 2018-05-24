@@ -30,13 +30,13 @@ assembler shipped with TI GCC.
 The [TI GCC for MSP430](http://www.tool.com/mps430-gcc-opensourcemspms) is a
 pre-built toolchain based on GCC, and released by TI. This toolchain is conveniently
 packaged for Arch Linux by the
-[ti-mspgcc](https://aur.archlinux.org/packages/mspgcc-ti) package on AUR. To
+[mspgcc-ti](https://aur.archlinux.org/packages/mspgcc-ti) package on AUR. To
 install on Arch Linux, either `yaourt ti-mspgcc` if you use the `yaourt` helper,
 or manually:
 
-    wget https://aur.archlinux.org/cgit/aur.git/snapshot/ti-mspgcc.tar.gz
-    tar xf ti-mspgcc.tar.gz
-    cd ti-mspgcc
+    wget https://aur.archlinux.org/cgit/aur.git/snapshot/mspgcc-ti.tar.gz
+    tar xf mspgcc-ti.tar.gz
+    cd mspgcc-ti
     makepkg -si
     
 
