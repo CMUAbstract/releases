@@ -1,0 +1,73 @@
+From 80756a6bd94495fca7e20753b814ff43ef61cfe1 Mon Sep 17 00:00:00 2001
+From: Alexei Colin <ac@alexeicolin.com>
+Date: Fri, 25 May 2018 18:16:56 -0400
+Subject: [PATCH] MSP430: accept all interrupt numbers and don't emit alias
+
+This works around compile error that interrupt vector number in the
+interrupt() attribute is out of bounds, when building with TI MSP GCC.
+
+Despite both GCC and Clang using the same linker script, for Clang, we
+need to manually create a symbol and allocate it in the per-vector
+section (named with a name that matches the names that the linker script
+expects). Note that Clang creates __isr_* symbols automatically, but
+these are only interpreted by the deprecated MSPGCC compiler/linker, not
+by TI GCC for MSP. See more on this below.
+
+Clang creates __isr_* symbols for MSPGCC (see lib/CodeGen/TargetInfo.cpp
+MSP430TargetCodeGenInfo::SetTargetAttributes), these are not relevant
+for TI GCC, but they are not entirely harmless. They cause a problem
+because Clang generates __isr_N where N is divided by 2 (because MSPGCC
+wants it that way, I guess). So, if we pass a vector number, the odd and
+even vector numbers will generate the same symbol and therefore linking
+will fail with a multiply-defined symbol error. As a workaround we pass
+the doubled value.
+
+There is one more problem: Clang rejects vector numbers that are odd or
+above 30. So, this problem with the above problem form a catch-22
+situation: if we pass N/2 then the atttribute is accepted, but we get
+multiply-defined values; if we pass N, it's rejected; and if we pass
+N*2, it's rejected. So, the workaround is to not emit the __isr symbol
+at all, and to accept the full range of interrupt vector numbers.
+---
+ lib/CodeGen/TargetInfo.cpp | 8 ++++++++
+ lib/Sema/SemaDeclAttr.cpp  | 2 +-
+ 2 files changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/lib/CodeGen/TargetInfo.cpp b/lib/CodeGen/TargetInfo.cpp
+index 4e25c72cfb..635328b59c 100644
+--- a/lib/CodeGen/TargetInfo.cpp
++++ b/lib/CodeGen/TargetInfo.cpp
+@@ -6657,9 +6657,17 @@ void MSP430TargetCodeGenInfo::setTargetAttributes(
+       F->addFnAttr(llvm::Attribute::NoInline);
+ 
+       // Step 3: Emit ISR vector alias.
++#if 0 // To be compatible with TI MSPGCC (v5) headers, this symbol should be
++      // assigned to __interrupt_vector_# section, but it appears that there's
++      // no way to do that. And, no division by 2 should not be happening.
++      // Workaround is to create the symbol manually in C code, and not emit
++      // it here at all. It would be harmless without the /2, but with the
++      // division, we get duplicate symbols defined, since each two vectors
++      // map to the same symbol name, so disable this to not emit it at all.
+       unsigned Num = attr->getNumber() / 2;
+       llvm::GlobalAlias::create(llvm::Function::ExternalLinkage,
+                                 "__isr_" + Twine(Num), F);
++#endif
+     }
+   }
+ }
+diff --git a/lib/Sema/SemaDeclAttr.cpp b/lib/Sema/SemaDeclAttr.cpp
+index e4532a7e67..54d73770da 100644
+--- a/lib/Sema/SemaDeclAttr.cpp
++++ b/lib/Sema/SemaDeclAttr.cpp
+@@ -5101,7 +5101,7 @@ static void handleMSP430InterruptAttr(Sema &S, Decl *D,
+   }
+ 
+   unsigned Num = NumParams.getLimitedValue(255);
+-  if ((Num & 1) || Num > 30) {
++  if (Num > 55 * 2) {
+     S.Diag(AL.getLoc(), diag::err_attribute_argument_out_of_bounds)
+       << AL.getName() << (int)NumParams.getSExtValue()
+       << NumParamsExpr->getSourceRange();
+-- 
+2.17.0
+

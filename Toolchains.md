@@ -65,10 +65,13 @@ build recipe defined in `bld/Makefile` is sufficient to build an application
 with either TI GCC or LLVM/Clang.
 
 The only Clang version that has been tested is 3.8 (Clang commit 52ed5ec631 and
-LLVM commit be2b2c32d38). This version needs a patch related to interrupt
-service routines (ISRs) documented below.
+LLVM commit be2b2c32d38) and 6.0 (Clang commit bfc08965af and LLVM commit
+646a736e7b4). Both versions need a patch related to interrupt
+service routines (ISRs): [patch for
+3.8](clang-MSP430-accept-all-interrupt-vector-numbers-3-8.patch) or [patch for
+6.0](clang-MSP430-accept-all-interrupt-vector-numbers-6-0.patch).
 
-Since this version needs to be patched, it needs to be installed from source.
+Since Clang needs to be patched, it needs to be installed from source.
 Below is a summary of [the official installation
 instructions](http://clang.llvm.org/get_started.html) and [CMake build
 settings](http://llvm.org/docs/CMake.html).
@@ -77,14 +80,14 @@ settings](http://llvm.org/docs/CMake.html).
 
     git clone http://llvm.org/git/llvm.git llvm-src
     cd llvm-src
-    git checkout -b v3.8 be2b2c32d38
+    git checkout -b v6.0 646a736e7b4
     cd tools
     git clone http://llvm.org/git/clang.git
     cd clang
-    git checkout -b v3.8 52ed5ec631
+    git checkout -b v6.0 bfc08965af
 
-    wget https://github.com/CMUAbstract/releases/raw/master/clang-MSP430-accept-all-interrupt-vector-numbers.patch
-    git am < clang-MSP430-accept-all-interrupt-vector-numbers.patch
+    wget https://github.com/CMUAbstract/releases/raw/master/clang-MSP430-accept-all-interrupt-vector-numbers-6-0.patch
+    git am < clang-MSP430-accept-all-interrupt-vector-numbers-6-0.patch
     
     cd ../../..
     mkdir llvm-install && mkdir llvm-build
@@ -102,13 +105,15 @@ To point Maker to this build of Clang, set `LLVM_ROOT` to absolute path of the
 `ext/maker/Makefile.env`.
 
 
-#### Patch for Clang v3.8 to fix interrupt service routines
+#### Patch for Clang to fix interrupt service routines
 
 The problem is that Clang either rejects the argument to `interrupt()` attribute,
 that defines the interrupt vector number, or that Clang generates duplicate
 symbols `__isr_`. The problem and the solution is described in detail below.
 The patch can be found
-[here](clang-MSP430-accept-all-interrupt-vector-numbers.patch), and applied
+[here for 3.8](clang-MSP430-accept-all-interrupt-vector-numbers-3-8.patch) and
+[here for 6.0](clang-MSP430-accept-all-interrupt-vector-numbers-6-0.patch), and
+applied
 as was described below.
 
 Note that [libmsp](https://github.com/CMUAbstract/libmsp) provides the `ISR()`
@@ -116,21 +121,20 @@ macro for defining ISRs that is portable across both TI GCC and Clang, provided
 that the Clang is patched with the following patch. See documentation for ISR()
 usage in `libmsp/src/include/libmsp/periph.h`.
 
-Despite both GCC and Clang using the same linker script, for Clang, we need
-to manually create a symbol and allocate it in the per-vector section (named
-with a name that matches the names that the linker script expects). Note that
-Clang (at least v3.8 and earlier) creates `__isr_*` symbols automatically, but
-these are only interpreted by the deprecated MSPGCC compiler/linker, not by
-TI GCC for MSP. See more on this below.
+Despite both GCC and Clang using the same linker script, for Clang, we need to
+manually create a symbol and allocate it in the per-vector section (named with
+a name that matches the names that the linker script expects). Note that Clang
+creates `__isr_*` symbols automatically, but these are only interpreted by the
+deprecated MSPGCC compiler/linker, not by TI GCC for MSP. See more on this
+below.
 
-Clang (v3.8 and earlier) creates `__isr_*` symbols for MSPGCC (see
-lib/CodeGen/TargetInfo.cpp MSP430TargetCodeGenInfo::SetTargetAttributes), these
-are not relevant for TI GCC, but they are not entirely harmless. They cause a
-problem because Clang generates `__isr_N` where N is divided by 2 (because
-MSPGCC wants it that way, I guess). So, if we pass a vector number, the odd and
-even vector numbers will generate the same symbol and therefore linking will
-fail with a multiply-defined symbol error. As a workaround we pass the doubled
-value.
+Clang creates `__isr_*` symbols for MSPGCC (see lib/CodeGen/TargetInfo.cpp
+MSP430TargetCodeGenInfo::SetTargetAttributes), these are not relevant for TI
+GCC, but they are not entirely harmless. They cause a problem because Clang
+generates `__isr_N` where N is divided by 2 (because MSPGCC wants it that way,
+I guess). So, if we pass a vector number, the odd and even vector numbers will
+generate the same symbol and therefore linking will fail with a
+multiply-defined symbol error. As a workaround we pass the doubled value.
 
 There is one more problem that so far requires a patch to Clang: it rejects
 vector numbers that are odd or above 30. So, this problem with the above
