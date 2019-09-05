@@ -14,6 +14,8 @@ guide.
 a checkpoint-less programming model with compiler support for intermittent programming
 * [Chain](Chain.md): a task-based programming model and runtime for intermittent programming
 * [Capybara](Capybara.md): hardware and firmware for reconfigurable energy storage
+* [Coati](Coati.md): a task-based programming model and runtime that brings support for 
+asynchronous interrupts to intermittent systems 
 
 * Prior work **by other researchers**, forked, updated, and re-packaged for
   seemless builds of applications alongside builds with our systems:
