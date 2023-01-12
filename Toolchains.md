@@ -78,11 +78,11 @@ settings](http://llvm.org/docs/CMake.html).
 
     mkdir llvm && cd llvm
 
-    git clone http://llvm.org/git/llvm.git llvm-src
+    git clone https://github.com/llvm-mirror/llvm.git llvm-src
     cd llvm-src
     git checkout -b v6.0 646a736e7b4
     cd tools
-    git clone http://llvm.org/git/clang.git
+    git clone https://github.com/llvm-mirror/clang.git
     cd clang
     git checkout -b v6.0 bfc08965af
 
